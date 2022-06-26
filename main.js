@@ -47,19 +47,28 @@ const isValidFields = () => {
 const clearFields = () => {
     const fields = document.querySelectorAll('.modal-field')
     fields.forEach(field => field.value = "")
+    document.getElementById('nome').dataset.index = 'new'
 }
 
 const saveClient = () => {
-    if(isValidFields()){
+    debugger
+    if (isValidFields()) {
         const client = {
-            nome: document.getElementById('nome'),
-            email: document.getElementById('email'),
-            celular: document.getElementById('celular'),
-            cidade: document.getElementById('cidade'),
+            nome: document.getElementById('nome').value,
+            email: document.getElementById('email').value,
+            celular: document.getElementById('celular').value,
+            cidade: document.getElementById('cidade').value
         }
-        createClient(client)
-        updateTable()
-        closeModal()
+        const index = document.getElementById('nome').dataset.index
+        if (index == 'new') {
+            createClient(client)
+            updateTable()
+            closeModal()
+        } else {
+            updateClient(index, client)
+            updateTable()
+            closeModal()
+        }
     }
 }
 
@@ -136,3 +145,6 @@ document.getElementById('salvar')
 
 document.querySelector('#tableClient>tbody')
     .addEventListener('click', editDelete)
+
+document.getElementById('cancelar')
+    .addEventListener('click', closeModal)
