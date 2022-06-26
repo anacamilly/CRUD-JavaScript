@@ -85,6 +85,7 @@ const clearTable = () => {
 
 const updateTable = () => {
     const dbClient = readClient()
+    clearTable()
     dbClient.forEach(createRow)
 }
 
