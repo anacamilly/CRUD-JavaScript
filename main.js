@@ -42,9 +42,30 @@ const createClient = (client) => {
     setLocalStorage(dbClient)
 }
 
+const isValidFields = () => {
+    document.getElementById('form').reportValidity()
+}
+
+// Interação com o layout
+const saveClient = () => {
+    if(isValidFields()){
+        const client = {
+            nome: document.getElementById('nome'),
+            email: document.getElementById('email'),
+            celular: document.getElementById('celular'),
+            cidade: document.getElementById('cidade'),
+        }
+        createClient(client)
+    }
+}
+
+
 // Eventos
 document.getElementById('cadastrarCliente')
     .addEventListener('click', openModal)
 
 document.getElementById('modalClose')
     .addEventListener('click', closeModal)
+
+document.getElementById('salvar')
+    .addEventListener('click', saveClient)
